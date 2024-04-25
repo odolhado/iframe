@@ -22,6 +22,7 @@
             window.onload = function() {
                 var message = "Hello from iframe!";
                 var event = new CustomEvent('loaded', { detail: message });
+                window.top.postMessage('loaded', '*')
                 window.parent.dispatchEvent(event);
                 console.log('> sending', event);
             };
@@ -30,8 +31,8 @@
             button.addEventListener('click', function() {
                 var message = "Button clicked in iframe!";
                 var event = new CustomEvent('confirmed', { detail: message });
-                window.parent.dispatchEvent(event);
                 window.top.postMessage('confirmed', '*')
+                // window.parent.dispatchEvent(event);
                 console.log('> sending', event);
             });
         </script>
