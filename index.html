@@ -23,7 +23,7 @@
                 var message = "Hello from iframe!";
                 var event = new CustomEvent('loaded', { detail: message });
                 window.top.postMessage('loaded', '*')
-                window.parent.dispatchEvent(event);
+                // window.parent.dispatchEvent(event);
                 console.log('> sending', event);
             };
 
