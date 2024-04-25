@@ -25,7 +25,7 @@
                 var message = "Hello from iframe!";
                 var event = new CustomEvent('loaded', { detail: message });
                 window.parent.dispatchEvent(event);
-                window.top.postMessage('loaded', '*')
+                console.log('> sending', event);
             };
 
             // Get a reference to the button
@@ -36,6 +36,8 @@
                 var message = "Button clicked in iframe!";
                 var event = new CustomEvent('confirmed', { detail: message });
                 window.parent.dispatchEvent(event);
+                window.top.postMessage('confirmed', '*')
+                console.log('> sending', event);
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
