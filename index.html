@@ -1,18 +1,24 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>IFrame Content</title>
+    </head>
+    <body>
 
-<body>
-
-    <div>
-        MyIframe
-        <span>
-            script sending signal when button is pushed
-        </span>
-    </div>
-    <script>
-        // Dispatch a custom event from the iframe
-        window.onload = function() {
-            var message = "Hello from iframe!";
-            var event = new CustomEvent('confirmed', { detail: message });
-            window.parent.dispatchEvent(event);
-        };
-    </script>
-</body>
+        <div>
+            MyIframe
+            <span>
+                script sending signal when button is pushed
+            </span>
+        </div>
+        <script>
+            // Dispatch a custom event from the iframe
+            window.onload = function() {
+                var message = "Hello from iframe!";
+                var event = new CustomEvent('confirmed', { detail: message });
+                window.parent.dispatchEvent(event);
+            };
+        </script>
+    </body>
+</html>
