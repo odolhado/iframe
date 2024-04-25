@@ -11,20 +11,17 @@
             <h1 id="iframe">iframe</h1>
             <details>
                 I want to be Iframe
+                <span>
+                    Contains a script sending window message to parent when button is clicked. You can see the event content in the console
+                </span>
             </details>
             <div>
-            <span>
-                script sending signal when button is pushed
-            </span>
-
-                <!-- Your iframe content here -->
                 <button id="sendMessageButton">Send Message to Parent</button>
             </div>
         </div>
 
         <script>
 
-            // Dispatch a custom event from the iframe
             window.onload = function() {
                 var message = "Hello from iframe!";
                 var event = new CustomEvent('loaded', { detail: message });
@@ -32,10 +29,7 @@
                 console.log('> sending', event);
             };
 
-            // Get a reference to the button
             var button = document.getElementById('sendMessageButton');
-
-            // Add an event listener to the button
             button.addEventListener('click', function() {
                 var message = "Button clicked in iframe!";
                 var event = new CustomEvent('confirmed', { detail: message });
