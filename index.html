@@ -15,7 +15,10 @@
                 </span>
             </details>
             <div>
-                <button id="sendMessageButton">Send Message to Parent</button>
+                <button id="button-confirm">Emmit Confirm</button>
+            </div>
+            <div>
+                <button id="button-load">Emmit Load</button>
             </div>
         </div>
         <script>
@@ -27,12 +30,19 @@
                 console.log('> sending', event);
             };
 
-            var button = document.getElementById('sendMessageButton');
-            button.addEventListener('click', function() {
+            var buttonConfirm = document.getElementById('button-confirm');
+            buttonConfirm.addEventListener('click', function() {
                 var message = "Button clicked in iframe!";
                 var event = new CustomEvent('confirmed', { detail: message });
                 window.top.postMessage('confirmed', '*')
                 // window.parent.dispatchEvent(event);
+                console.log('> sending', event);
+            });
+
+            var buttonLoad = document.getElementById('button-load');
+            buttonLoad.addEventListener('click', function() {
+                var event = new CustomEvent('loaded', { detail: "message: loaded" });
+                window.top.postMessage('loaded', '*')
                 console.log('> sending', event);
             });
         </script>
