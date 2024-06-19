@@ -33,77 +33,49 @@
 
             function postMessageEvent(event){
                 console.log('> sending', event);
-                window.top.postMessage(event, '*')
+                window.top.postMessage({...event, eventName, type: eventType}, '*')
             };
 
             window.onload = function() {
                 postMessageEvent({
-                    eventName,
-                    eventType:'dummy type',
-                    detail: {
-                        type: eventType,
+                    payload: {
                         state: "LOADED",
                         status: 200
                     }
                 });
-
-                // window.top.postMessage({
-                //     eventName: 'eventName',
-                //     eventType:'dummy type',
-                //     detail: {
-                //         type: eventType,
-                //         state: "LOADED",
-                //         status: 200
-                //     }
-                // }, '*')
             };
 
             const buttonRedirect = document.getElementById('button-redirect');  // confirm > redirect > successPage
             buttonRedirect.addEventListener('click', function() {
                 postMessageEvent({
-                    eventName: eventName,
-                    detail: {
-                        type: eventType,
+                    payload: {
                         state: "REDIRECT",
                         status: 200
-                    }
+                    },
                 });
             });
 
             const buttonClose = document.getElementById('button-close'); // close > unload
             buttonClose.addEventListener('click', function() {
-                let event = {
-                    type: eventType,
-                    state: "UNLOADED",
-                };
-                console.log('> 3 sending', event);
                 postMessageEvent({
-                    type: eventType,
-                    state: "UNLOADED",
-                });
+                    payload: {
+                        state: "UNLOADED",
+                    }
+               });
             });
 
             const buttonTimeout = document.getElementById('button-timeout');  // timeout >
             buttonTimeout.addEventListener('click', function() {
-                let event = new CustomEvent(eventName, {
-                    detail:{
-                        type: eventType,
+                postMessageEvent({
+                    payload:{
                         state: "TIMEOUT",
                     }
                 });
-                window.top.postMessage(event, '*')
-                console.log('> 4 sending', event);
-                // postMessageEvent(event);
             });
             const buttonError = document.getElementById('button-error');  // error >
             buttonError.addEventListener('click', function() {
-                // let event = new CustomEvent(eventName, );
-                // window.top.postMessage(event, '*')
-                console.log('> 5 sending', event);
                 postMessageEvent({
-                    eventName,
-                    detail: {
-                        type: eventType,
+                    payload: {
                         state: "ERROR",
                         status: 400
                     }
