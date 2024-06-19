@@ -32,7 +32,7 @@
             const eventType = 'TELEMETRY';
 
             function postMessage(event){
-                console.log('> sending', event);
+                console.log('> 0 sending', event);
                 window.top.postMessage(event, '*')
             };
 
@@ -42,7 +42,7 @@
                     state: "LOADED",
                     status: 200
                 });
-                console.log('> sending', event);
+                console.log('> 1 sending', event);
                 window.top.postMessage(event, '*')
             };
 
@@ -53,36 +53,36 @@
                     state: "REDIRECT",
                     status: 200
                 });
-                console.log('> sending', event);
+                console.log('> 2 sending', event);
                 window.top.postMessage(event, '*')
             });
 
-            const buttonClose = document.getElementById('button-close'); // close > unload
-            buttonClose.addEventListener('click', function() {
-                const event = new CustomEvent(eventName, {
-                    type: eventType,
-                    state: "UNLOADED",
-                });
-                postMessage(event);
-            });
-
-            const buttonTimeout = document.getElementById('button-timeout');  // timeout >
-            buttonTimeout.addEventListener('click', function() {
-                const event = new CustomEvent(eventName, {
-                    type: eventType,
-                    state: "TIMEOUT",
-                });
-                postMessage(event);
-            });
-            const buttonError = document.getElementById('button-error');  // error >
-            buttonError.addEventListener('click', function() {
-                const event = new CustomEvent(eventName, {
-                    type: eventType,
-                    state: "ERROR",
-                    status: 400
-                });
-                postMessage(event);
-            });
+            // const buttonClose = document.getElementById('button-close'); // close > unload
+            // buttonClose.addEventListener('click', function() {
+            //     const event = new CustomEvent(eventName, {
+            //         type: eventType,
+            //         state: "UNLOADED",
+            //     });
+            //     postMessage(event);
+            // });
+            //
+            // const buttonTimeout = document.getElementById('button-timeout');  // timeout >
+            // buttonTimeout.addEventListener('click', function() {
+            //     const event = new CustomEvent(eventName, {
+            //         type: eventType,
+            //         state: "TIMEOUT",
+            //     });
+            //     postMessage(event);
+            // });
+            // const buttonError = document.getElementById('button-error');  // error >
+            // buttonError.addEventListener('click', function() {
+            //     const event = new CustomEvent(eventName, {
+            //         type: eventType,
+            //         state: "ERROR",
+            //         status: 400
+            //     });
+            //     postMessage(event);
+            // });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
         <script>anchors.add();</script>
