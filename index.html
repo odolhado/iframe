@@ -15,35 +15,69 @@
                 </span>
             </details>
             <div>
-                <button id="button-confirm">Emmit Confirm</button>
+                <button id="button-redirect">emmit REDIRECT > SuccessPage</button>
             </div>
             <div>
-                <button id="button-load">Emmit Load</button>
+                <button id="button-close">emmit UNLOADED</button>
+            </div>
+            <div>
+                <button id="button-timeout">emmit TIMEOUT</button>
+            </div>
+            <div>
+                <button id="button-error">emmit ERROR</button>
             </div>
         </div>
         <script>
+            const eventType = 'TELEMETRY';
             window.onload = function() {
-                var message = "Hello from iframe!";
-                var event = new CustomEvent('loaded', { detail: message });
-                window.top.postMessage('loaded', '*')
-                // window.parent.dispatchEvent(event);
+                var event = new CustomEvent('message', {
+                    type: eventType,
+                    state: "LOADED",
+                    status: 200
+                });
                 console.log('> sending', event);
+                window.top.postMessage(event, '*')
             };
 
-            var buttonConfirm = document.getElementById('button-confirm');
-            buttonConfirm.addEventListener('click', function() {
-                var message = "Button clicked in iframe!";
-                var event = new CustomEvent('confirmed', { detail: message });
-                window.top.postMessage('confirmed', '*')
-                // window.parent.dispatchEvent(event);
+            var buttonRedirect = document.getElementById('button-redirect');  // confirm > redirect > successPage
+            buttonRedirect.addEventListener('click', function() {
+                var event = new CustomEvent('message', {
+                    type: eventType,
+                    state: "REDIRECT",
+                    status: 200
+                });
                 console.log('> sending', event);
+                window.top.postMessage(event, '*')
             });
 
-            var buttonLoad = document.getElementById('button-load');
-            buttonLoad.addEventListener('click', function() {
-                var event = new CustomEvent('loaded', { detail: "message: loaded" });
-                window.top.postMessage('loaded', '*')
+            var buttonClose = document.getElementById('button-close'); // close > unload
+            buttonClose.addEventListener('click', function() {
+                var event = new CustomEvent('message', {
+                    type: eventType,
+                    state: "UNLOADED",
+                });
                 console.log('> sending', event);
+                window.top.postMessage(event, '*')
+            });
+
+            var buttonTimeout = document.getElementById('button-timeout');  // timeout >
+            buttonTimeout.addEventListener('click', function() {
+                var event = new CustomEvent('message', {
+                    type: eventType,
+                    state: "TIMEOUT",
+                });
+                console.log('> sending', event);
+                window.top.postMessage(event, '*')
+            });
+            var buttonError = document.getElementById('button-error');  // error >
+            buttonError.addEventListener('click', function() {
+                var event = new CustomEvent('message', {
+                    type: eventType,
+                    state: "ERROR",
+                    status: 400
+                });
+                console.log('> sending', event);
+                window.top.postMessage(event, '*')
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
