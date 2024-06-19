@@ -31,10 +31,10 @@
             const eventName = 'message';
             const eventType = 'TELEMETRY';
 
-            function postMessageEvent(event){
-                console.log('> sending', event.data, event.detail);
-                window.top.postMessage(event, '*')
-            };
+            // function postMessageEvent(event){
+            //     console.log('> sending', event);
+            //     window.top.postMessage(event, '*')
+            // };
 
             window.onload = function() {
                 let event = new CustomEvent(eventName, {
@@ -44,9 +44,9 @@
                         status: 200
                     }
                 });
-                // console.log('> 1 sending', event);
-                // window.top.postMessage(event, '*')
-                postMessageEvent(event);
+                console.log('> 1 sending', event);
+                window.top.postMessage(event, '*')
+                // postMessageEvent(event);
             };
 
             const buttonRedirect = document.getElementById('button-redirect');  // confirm > redirect > successPage
@@ -68,7 +68,8 @@
                     type: eventType,
                     state: "UNLOADED",
                 });
-                postMessageEvent(event);
+                window.top.postMessage(event, '*')
+                // postMessageEvent(event);
             });
 
             const buttonTimeout = document.getElementById('button-timeout');  // timeout >
@@ -79,7 +80,8 @@
                         state: "TIMEOUT",
                     }
                 });
-                postMessageEvent(event);
+                window.top.postMessage(event, '*')
+                // postMessageEvent(event);
             });
             const buttonError = document.getElementById('button-error');  // error >
             buttonError.addEventListener('click', function() {
@@ -90,7 +92,8 @@
                         status: 400
                     }
                 });
-                postMessageEvent(event);
+                window.top.postMessage(event, '*')
+                // postMessageEvent(event);
             })
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
