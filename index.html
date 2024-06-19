@@ -42,7 +42,8 @@
                     state: "LOADED",
                     status: 200
                 });
-                postMessage({...event, state: 'LOADED'});
+                console.log('> sending', event);
+                window.top.postMessage(event, '*')
             };
 
             const buttonRedirect = document.getElementById('button-redirect');  // confirm > redirect > successPage
@@ -52,7 +53,8 @@
                     state: "REDIRECT",
                     status: 200
                 });
-                postMessage(event);
+                console.log('> sending', event);
+                window.top.postMessage(event, '*')
             });
 
             const buttonClose = document.getElementById('button-close'); // close > unload
