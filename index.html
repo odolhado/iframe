@@ -32,7 +32,7 @@
             const eventType = 'TELEMETRY';
 
             function postMessageEvent(event){
-                console.log('> sending', JSON.stringify(event));
+                console.log('> sending', JSON.stringify({...event, eventName, type: eventType}));
                 window.top.postMessage({...event, eventName, type: eventType}, '*')
             };
 
