@@ -28,56 +28,57 @@
             </div>
         </div>
         <script>
+            const eventName = 'message';
             const eventType = 'TELEMETRY';
-            window.onload = function() {
-                var event = new CustomEvent('message', {
-                    type: eventType,
-                    state: "LOADED",
-                    status: 200
-                });
+            const postMessage = function(event){
                 console.log('> sending', event);
                 window.top.postMessage(event, '*')
             };
 
+            window.onload = function() {
+                var event = new CustomEvent(eventName, {
+                    type: eventType,
+                    state: "LOADED",
+                    status: 200
+                });
+                postMessage(event);
+            };
+
             var buttonRedirect = document.getElementById('button-redirect');  // confirm > redirect > successPage
             buttonRedirect.addEventListener('click', function() {
-                var event = new CustomEvent('message', {
+                var event = new CustomEvent(eventName, {
                     type: eventType,
                     state: "REDIRECT",
                     status: 200
                 });
-                console.log('> sending', event);
-                window.top.postMessage(event, '*')
+                postMessage(event);
             });
 
             var buttonClose = document.getElementById('button-close'); // close > unload
             buttonClose.addEventListener('click', function() {
-                var event = new CustomEvent('message', {
+                var event = new CustomEvent(eventName, {
                     type: eventType,
                     state: "UNLOADED",
                 });
-                console.log('> sending', event);
-                window.top.postMessage(event, '*')
+                postMessage(event);
             });
 
             var buttonTimeout = document.getElementById('button-timeout');  // timeout >
             buttonTimeout.addEventListener('click', function() {
-                var event = new CustomEvent('message', {
+                var event = new CustomEvent(eventName, {
                     type: eventType,
                     state: "TIMEOUT",
                 });
-                console.log('> sending', event);
-                window.top.postMessage(event, '*')
+                postMessage(event);
             });
             var buttonError = document.getElementById('button-error');  // error >
             buttonError.addEventListener('click', function() {
-                var event = new CustomEvent('message', {
+                var event = new CustomEvent(eventName, {
                     type: eventType,
                     state: "ERROR",
                     status: 400
                 });
-                console.log('> sending', event);
-                window.top.postMessage(event, '*')
+                postMessage(event);
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
