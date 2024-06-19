@@ -31,36 +31,50 @@
             const eventName = 'message';
             const eventType = 'TELEMETRY';
 
-            // function postMessageEvent(event){
-            //     console.log('> sending', event);
-            //     window.top.postMessage(event, '*')
-            // };
+            function postMessageEvent(event){
+                console.log('> sending', event);
+                window.top.postMessage(event, '*')
+            };
 
             window.onload = function() {
-                let event = new CustomEvent(eventName, {
+                let event = new CustomEvent(, );
+                console.log('> 1 sending', {
                     detail: {
                         type: eventType,
                         state: "LOADED",
                         status: 200
                     }
                 });
-                console.log('> 1 sending', event);
-                window.top.postMessage(event, '*')
+                window.top.postMessage({
+                    eventName: 'eventName',
+                    eventType:'dummy type',
+                    detail: {
+                        type: eventType,
+                        state: "LOADED",
+                        status: 200
+                    }
+                }, '*')
                 // postMessageEvent(event);
             };
 
             const buttonRedirect = document.getElementById('button-redirect');  // confirm > redirect > successPage
             buttonRedirect.addEventListener('click', function() {
-                let event = new CustomEvent(eventName, {
+                postMessageEvent({
+                    eventName: eventName,
                     detail: {
                         type: eventType,
                         state: "REDIRECT",
                         status: 200
                     }
                 });
-                // postMessageEvent(event);
-                window.top.postMessage(event, '*')
-                console.log('> 2 sending', event);
+                window.top.postMessage({
+                    eventName: eventName,
+                    detail: {
+                        type: eventType,
+                        state: "REDIRECT",
+                        status: 200
+                    }
+                }, '*')
             });
 
             const buttonClose = document.getElementById('button-close'); // close > unload
