@@ -58,8 +58,8 @@
                         status: 200
                     }
                 });
-                postMessageEvent(event);
-                // window.top.postMessage(event, '*')
+                // postMessageEvent(event);
+                window.top.postMessage(event, '*')
             });
 
             const buttonClose = document.getElementById('button-close'); // close > unload
@@ -84,9 +84,11 @@
             const buttonError = document.getElementById('button-error');  // error >
             buttonError.addEventListener('click', function() {
                 let event = new CustomEvent(eventName, {
-                    type: eventType,
-                    state: "ERROR",
-                    status: 400
+                    detail: {
+                        type: eventType,
+                        state: "ERROR",
+                        status: 400
+                    }
                 });
                 postMessageEvent(event);
             })
