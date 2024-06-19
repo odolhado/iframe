@@ -37,23 +37,25 @@
             };
 
             window.onload = function() {
-                console.log('> 1 sending', {
-                    detail: {
-                        type: eventType,
-                        state: "LOADED",
-                        status: 200
-                    }
-                });
-                window.top.postMessage({
-                    eventName: 'eventName',
+                postMessageEvent({
+                    eventName,
                     eventType:'dummy type',
                     detail: {
                         type: eventType,
                         state: "LOADED",
                         status: 200
                     }
-                }, '*')
-                // postMessageEvent(event);
+                });
+
+                // window.top.postMessage({
+                //     eventName: 'eventName',
+                //     eventType:'dummy type',
+                //     detail: {
+                //         type: eventType,
+                //         state: "LOADED",
+                //         status: 200
+                //     }
+                // }, '*')
             };
 
             const buttonRedirect = document.getElementById('button-redirect');  // confirm > redirect > successPage
@@ -66,25 +68,19 @@
                         status: 200
                     }
                 });
-                window.top.postMessage({
-                    eventName: eventName,
-                    detail: {
-                        type: eventType,
-                        state: "REDIRECT",
-                        status: 200
-                    }
-                }, '*')
             });
 
             const buttonClose = document.getElementById('button-close'); // close > unload
             buttonClose.addEventListener('click', function() {
-                let event = new CustomEvent(eventName, {
+                let event = {
+                    type: eventType,
+                    state: "UNLOADED",
+                };
+                console.log('> 3 sending', event);
+                postMessageEvent({
                     type: eventType,
                     state: "UNLOADED",
                 });
-                window.top.postMessage(event, '*')
-                console.log('> 3 sending', event);
-                // postMessageEvent(event);
             });
 
             const buttonTimeout = document.getElementById('button-timeout');  // timeout >
@@ -101,16 +97,17 @@
             });
             const buttonError = document.getElementById('button-error');  // error >
             buttonError.addEventListener('click', function() {
-                let event = new CustomEvent(eventName, {
+                // let event = new CustomEvent(eventName, );
+                // window.top.postMessage(event, '*')
+                console.log('> 5 sending', event);
+                postMessageEvent({
+                    eventName,
                     detail: {
                         type: eventType,
                         state: "ERROR",
                         status: 400
                     }
                 });
-                window.top.postMessage(event, '*')
-                console.log('> 5 sending', event);
-                // postMessageEvent(event);
             })
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
