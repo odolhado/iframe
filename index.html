@@ -60,6 +60,7 @@
                 });
                 // postMessageEvent(event);
                 window.top.postMessage(event, '*')
+                console.log('> 2 sending', event);
             });
 
             const buttonClose = document.getElementById('button-close'); // close > unload
@@ -69,6 +70,7 @@
                     state: "UNLOADED",
                 });
                 window.top.postMessage(event, '*')
+                console.log('> 3 sending', event);
                 // postMessageEvent(event);
             });
 
@@ -81,6 +83,7 @@
                     }
                 });
                 window.top.postMessage(event, '*')
+                console.log('> 4 sending', event);
                 // postMessageEvent(event);
             });
             const buttonError = document.getElementById('button-error');  // error >
@@ -93,6 +96,7 @@
                     }
                 });
                 window.top.postMessage(event, '*')
+                console.log('> 5 sending', event);
                 // postMessageEvent(event);
             })
         </script>
