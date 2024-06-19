@@ -38,9 +38,11 @@
 
             window.onload = function() {
                 let event = new CustomEvent(eventName, {
-                    type: eventType,
-                    state: "LOADED",
-                    status: 200
+                    detail: {
+                        type: eventType,
+                        state: "LOADED",
+                        status: 200
+                    }
                 });
                 // console.log('> 1 sending', event);
                 // window.top.postMessage(event, '*')
@@ -50,9 +52,11 @@
             const buttonRedirect = document.getElementById('button-redirect');  // confirm > redirect > successPage
             buttonRedirect.addEventListener('click', function() {
                 let event = new CustomEvent(eventName, {
-                    type: eventType,
-                    state: "REDIRECT",
-                    status: 200
+                    detail: {
+                        type: eventType,
+                        state: "REDIRECT",
+                        status: 200
+                    }
                 });
                 postMessageEvent(event);
                 // window.top.postMessage(event, '*')
@@ -70,8 +74,10 @@
             const buttonTimeout = document.getElementById('button-timeout');  // timeout >
             buttonTimeout.addEventListener('click', function() {
                 let event = new CustomEvent(eventName, {
-                    type: eventType,
-                    state: "TIMEOUT",
+                    detail:{
+                        type: eventType,
+                        state: "TIMEOUT",
+                    }
                 });
                 postMessageEvent(event);
             });
