@@ -28,12 +28,11 @@
             </div>
         </div>
         <script>
-            const eventName = 'message';
             const eventType = 'TELEMETRY';
 
             function postMessageEvent(event){
-                console.log('> sending', JSON.stringify({...event, eventName, type: eventType}));
-                window.top.postMessage({...event, eventName, type: eventType}, '*')
+                console.log('> sending', JSON.stringify({...event, type: eventType}));
+                window.top.postMessage({...event, type: eventType}, '*')
             };
 
             window.onload = function() {
